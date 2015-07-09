@@ -1,0 +1,54 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    archive-tar-minitar (0.5.2)
+    cloudstack_ruby_client (1.0.2)
+    diff-lcs (1.2.5)
+    docker-api (1.18.0)
+      archive-tar-minitar
+      excon (>= 0.38.0)
+      json
+    excon (0.45.3)
+    json (1.8.3)
+    multi_json (1.11.2)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
+    net-telnet (0.1.1)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+    rspec-core (3.3.1)
+      rspec-support (~> 3.3.0)
+    rspec-expectations (3.3.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-its (1.2.0)
+      rspec-core (>= 3.0.0)
+      rspec-expectations (>= 3.0.0)
+    rspec-mocks (3.3.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-support (3.3.0)
+    serverspec (2.19.0)
+      multi_json
+      rspec (~> 3.0)
+      rspec-its
+      specinfra (~> 2.35)
+    sfl (2.2)
+    specinfra (2.37.1)
+      net-scp
+      net-ssh (~> 2.7)
+      net-telnet
+      sfl
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cloudstack_ruby_client
+  docker-api (= 1.18.0)
+  rspec
+  serverspec
+  specinfra
