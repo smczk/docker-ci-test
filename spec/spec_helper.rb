@@ -59,9 +59,9 @@ RSpec.configure do |c|
       retry
     end
 
-    set :backend, :docker
-    set :docker_url, "tcp://#{ip}:2375"
-    set :docker_image, image.id
+    Specinfra.configuration.set :backend, :docker
+    Specinfra.configuration.set :docker_url, "tcp://#{ip}:2375"
+    Specinfra.configuration.set :docker_image, image.id
   end
 
   c.after :suite do
