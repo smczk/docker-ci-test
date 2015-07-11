@@ -50,7 +50,7 @@ RSpec.configure do |c|
 
     ip = client.list_virtual_machines({ :id => vmid })["virtualmachine"][0]["nic"][0]["ipaddress"]
     Docker.url = "tcp://#{ip}:2375"
-    dockerfile = File.open('Dockerfile').read
+    dockerfile = File.open('Dockerfile'){|file| file.read}
 
     begin
       image = Docker::Image.build(dockerfile)
