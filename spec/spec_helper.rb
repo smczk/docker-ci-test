@@ -31,26 +31,26 @@ RSpec.configure do |c|
       name: TEMPLATE_NAME
     })["template"][0]
 
-    response = client.deploy_virtual_machine({
-      :serviceofferingid => service_offering["id"],
-      :templateid => template["id"],
-      :zoneid => zone["id"],
-    })
+    response = client.deploy_virtual_machine(
+      serviceofferingid: service_offering["id"],
+      templateid: template["id"],
+      zoneid: zone["id"]
+    )
 
     vmid = response["id"]
 
     loop{
       sleep 5
-      virtualmachine = client.list_virtual_machines({ :id => vmid })["virtualmachine"][0]
+      virtualmachine = client.list_virtual_machines(id: vmid)["virtualmachine"][0]
       break if virtualmachine["state"] == "Running"
     }
 
-    client.update_virtual_machine({ :id => vmid, :userdata => USER_DATA })
-    client.reboot_virtual_machine({ :id => vmid })
+    client.update_virtual_machine(id: vmid, userdata: USER_DATA)
+    client.reboot_virtual_machine(id: vmid)
 
-    ip = client.list_virtual_machines({ :id => vmid })["virtualmachine"][0]["nic"][0]["ipaddress"]
+    ip = client.list_virtual_machines(id: vmid)["virtualmachine"][0]["nic"][0]["ipaddress"]
     Docker.url = "tcp://#{ip}:2375"
-    dockerfile = File.open('Dockerfile'){|file| file.read}
+    dockerfile = File.open('Dockerfile'){|file| file.read }
 
     begin
       image = Docker::Image.build(dockerfile)
@@ -65,6 +65,6 @@ RSpec.configure do |c|
   end
 
   c.after :suite do
-    client.destroy_virtual_machine({ :id => vmid })
+    client.destroy_virtual_machine(id: vmid)
   end
 end
